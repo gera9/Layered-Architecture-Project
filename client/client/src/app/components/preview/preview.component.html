@@ -1,0 +1,26 @@
+<div class="col-md-10 offset-md-1 mb-2">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="text-center">{{book.title}}</h1>
+            <hr class="mb-4">
+            <a href="{{ book.previewLink }}" target="_blank">
+                <img 
+                [src]="book.image == '' ? '/assets/noimage.png' : book.image"
+                class="cover-book mb-4"
+                alt="{{ book.title }}"
+                />
+            </a>
+            <p class="text-muted">Libro por: {{ book.authors }}</p>
+            <p><strong>Descripción:</strong></p>
+            <p>
+                {{ book.description }}
+            </p>
+            <p><strong>Fecha de publicación:</strong> {{ book.publishedDate }}</p>
+            <p><strong>Editorial:</strong> {{ book.publisher }}</p>
+            <hr>
+            <a class="btn btn-success" href="{{ book.previewLink }}" target="_blank">
+                Ir a Google Books
+            </a>
+        </div>
+    </div>
+</div>

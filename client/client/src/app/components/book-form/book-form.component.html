@@ -1,0 +1,53 @@
+<div class="col-md-4 offset-md-2 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="book.title" name="title" placeholder="Título" class="form-control" autofocus required>
+                </div>
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="book.authors" name="authors" placeholder="Autores" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="book.publisher" name="publisher" placeholder="Editor" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" [(ngModel)]="book.publishedDate" name="publishedDate" placeholder="Fecha de publicación" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="description" [(ngModel)]="book.description" rows="2" placeholder="Descripción" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="url" name="image" [(ngModel)]="book.image" placeholder="Imagen (URL)" class="form-control" required>
+                </div>
+                <div class="form-group mb-4">
+                    <input type="url" name="previewLink" [(ngModel)]="book.previewLink" placeholder="Link a Google Books" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <input (click)="edit ? updateBook() : saveNewBook()" class="btn btn-success form-control" type="button" value="Guardar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="card">
+        <img
+          [src]="book.image == '' ? '/assets/noimage.png' : book.image"
+          class="book-cover card-img-top"
+          alt="{{ book.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title == '' ? 'Título' : book.title }}</h5>
+          <p class="description card-text">
+            {{ book.description == '' ? 'Descripción' : book.description }}
+          </p>
+          <p class="card-text"><small class="text-muted">{{ book.publisher == '' ? 'Editor' : book.publisher }}</small></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <button disabled class="btn btn-primary btn-sm">Actualizar</button>
+            <button disabled class="btn btn-danger btn-sm">Eliminar</button>
+        </div>
+      </div>
+</div>

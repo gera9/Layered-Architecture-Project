@@ -1,0 +1,28 @@
+<div
+  class="row"
+>
+  <div class="col-md-3 mb-4" *ngFor="let book of books">
+    <div class="card">
+      <a [routerLink]="['visualizar', book._id]">
+        <img
+        [src]="book.image"
+        class="book-cover card-img-top"
+        alt="{{ book.title }}"
+      />
+      </a>
+      <div class="card-body">
+        <a class="title-link" [routerLink]="['visualizar', book._id]">
+          <h5 class="card-title">{{ book.title }}</h5>
+        </a>
+        <p class="description card-text">
+          {{ book.description }}
+        </p>
+        <p class="card-text"><small class="text-muted">{{ book.publisher }}</small></p>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+          <a [routerLink]="['editar', book._id]" class="btn btn-primary btn-sm">Editar</a>
+          <button class="btn btn-danger btn-sm" (click)="deleteBook(book._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

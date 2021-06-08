@@ -1,0 +1,59 @@
+version: '3.0'
+
+services: 
+    db:
+        image: mongo:latest
+        restart: always
+        container_name: db
+        ports: 
+            - '27017:27017'
+        volumes: 
+            - ~/mongo/data:/data/db
+        networks: 
+            - app
+
+    dbms:
+        image: mongo-express
+        restart: always
+        ports: 
+            - '8081:8081'
+        container_name: dbms
+        depends_on: 
+            - db
+        networks: 
+            - app
+        environment: 
+            ME_CONFIG_MONGODB_SERVER: db 
+            ME_CONFIG_BASICAUTH_USERNAME: foo
+            ME_CONFIG_BASICAUTH_PASSWORD: bar123
+        
+    generator:
+        build: ./generator
+        networks: 
+            - app
+        depends_on: 
+            - db
+        container_name: generator
+
+    api:
+        build: ./api
+        networks: 
+            - app
+        depends_on: 
+            - generator
+        container_name: api
+        restart: always
+        ports: 
+            - '5000:5000'
+    
+    client:
+        build: ./client
+        networks: 
+            - app
+        depends_on: 
+            - api
+        ports: 
+            - '4200:80'
+
+networks: 
+    app:
